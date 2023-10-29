@@ -58,6 +58,9 @@ def parse_objdump_output(output):
             # call命令の引数が16進数のアドレスの場合
             if match := re.match(r"([0-9a-f]+)", arg) or re.match(r"0x([0-9a-f]+)", arg):
                 address = int(match.group(1), 16)
+                # 関数名が存在しない場合は適当な名前をつける
+                if address not in address_to_func:
+                    address_to_func[address] = f"func_0x{match.group(1)}"
                 # 関数名に変換する
                 func_dependencies[func].add(address_to_func[address])
             # call命令の引数が関数名でない場合
