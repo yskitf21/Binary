@@ -10,30 +10,29 @@ def get_objdump_output(binary_path):
 
 
 def parse_objdump_output(output):
-    # アセンブリのダンプを行ごとに分割
     lines = output.splitlines()
 
     func_instruction_cnt = {}
-    current_function = ""
+    current_func = ""
 
     for line in lines:
         # 関数の開始を検知したらキーと値を初期化する
         if match := re.match(r"([0-9a-f]+) <(.+)>:", line):
-            current_function = match.group(2)
-            func_instruction_cnt[current_function] = 0
+            current_func = match.group(2)
+            func_instruction_cnt[current_func] = 0
         # 関数の開始以外で、アセンブリの行を検出したらカウントを増やす
         elif re.match(r" +[0-9a-f]+:", line):
-            func_instruction_cnt[current_function] += 1
+            func_instruction_cnt[current_func] += 1
         # 空行を検出したらその関数は終了したとみなす
         else:
-            current_function = ""
+            current_func = ""
 
     return func_instruction_cnt
 
 
 def main():
-    binary_path = "./a.out"
-    output = get_objdump_output(binary_path)
+    BIN_PATH = "./a.out"
+    output = get_objdump_output(BIN_PATH)
     dct = parse_objdump_output(output)
 
     for func, count in dct.items():
