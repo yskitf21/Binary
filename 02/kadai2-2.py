@@ -62,12 +62,17 @@ def parse_objdump_output(output):
                 if address not in address_to_func:
                     address_to_func[address] = f"func_0x{match.group(1)}"
                 # 関数名に変換する
+                func_name = address_to_func[address]
+                if func_name.startswith("_"):
+                    continue
                 func_dependencies[func].add(address_to_func[address])
             # call命令の引数が関数名でない場合
             elif not re.match(r"^[a-zA-Z]", arg):
                 pass
             # call命令の引数が関数名の場合
             else:
+                if arg.startswith("_"):
+                    continue
                 func_dependencies[func].append(arg)
 
     return func_dependencies
