@@ -1,0 +1,14 @@
+_init: 8 instructions
+.plt: 7 instructions
+__cxa_finalize@plt: 3 instructions
+printf@plt: 3 instructions
+_start: 14 instructions
+deregister_tm_clones: 11 instructions
+register_tm_clones: 16 instructions
+__do_global_dtors_aux: 17 instructions
+frame_dummy: 2 instructions
+sum: 19 instructions
+main: 17 instructions
+__libc_csu_init: 36 instructions
+__libc_csu_fini: 2 instructions
+_fini: 4 instructions
