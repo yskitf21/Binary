@@ -3,7 +3,7 @@ import re
 
 
 def get_objdump_output(binary_path):
-    # objdumpを使用してアセンブリのダンプを取得
+    # objdumpを使用する
     cmd = ["objdump", "-d", binary_path]
     result = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
     return result.stdout
@@ -31,7 +31,7 @@ def parse_objdump_output(output):
 
 
 def main():
-    BIN_PATH = "./a.out"
+    BIN_PATH = input("Please input your binary path: ")
     output = get_objdump_output(BIN_PATH)
     dct = parse_objdump_output(output)
 

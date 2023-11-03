@@ -79,7 +79,7 @@ def parse_objdump_output(output):
 
 
 def main():
-    BIN_PATH = "./a.out"
+    BIN_PATH = input("Please input your binary path: ")
     output = get_objdump_output(BIN_PATH)
     func_dependencies = parse_objdump_output(output)
 
